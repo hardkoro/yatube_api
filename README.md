@@ -2,7 +2,9 @@
 
 ## Описание
 
-API позволяет получать и редактировать информацию о публикациях, комментариях, группах и подписках сервиса YaTube
+API позволяет получать и редактировать информацию о публикациях, комментариях, группах и подписках сервиса YaTube.
+
+Документация доступна по адресу: http://localhost:8000/redoc/
 
 ## Установка
 
@@ -49,7 +51,7 @@ python manage.py runserver
 Получение публикаций:
 
 ```
-/api/v1/posts/
+http://localhost:8000/api/v1/posts/
 ```
 
 ```
@@ -73,7 +75,7 @@ python manage.py runserver
 Добавление комментария 
 
 ```
-/api/v1/posts/{post_id}/comments/
+http://localhost:8000/api/v1/posts/{post_id}/comments/
 ```
 
 ```
