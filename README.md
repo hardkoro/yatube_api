@@ -72,7 +72,7 @@ http://localhost:8000/api/v1/posts/
 }
 ```
 
-Добавление комментария 
+Добавление комментария к посту: 
 
 ```
 http://localhost:8000/api/v1/posts/{post_id}/comments/
