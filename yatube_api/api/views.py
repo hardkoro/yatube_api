@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404
-from posts.models import Post
+from posts.models import Group, Post
 from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
 
 from .permissions import OwnerOrReadOnly, ReadOnly
-from .serializers import CommentSerializer, PostSerializer
+from .serializers import CommentSerializer, GroupSerializer, PostSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -36,3 +36,10 @@ class CommentViewSet(viewsets.ModelViewSet):
             return (ReadOnly(), )
 
         return super().get_permissions()
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """Получение списка доступных сообществ."""
+    serializer_class = GroupSerializer
+    permission_classes = (ReadOnly, )
+    queryset = Group.objects.all()
