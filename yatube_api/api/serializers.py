@@ -1,10 +1,11 @@
-from posts.models import Comment, Group, Post
+from django.shortcuts import get_object_or_404
+from posts.models import Comment, Follow, Group, Post, User
 from rest_framework import serializers
-from rest_framework.relations import SlugRelatedField
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = SlugRelatedField(slug_field='username', read_only=True)
+    author = serializers.SlugRelatedField(
+        slug_field='username', read_only=True)
 
     class Meta:
         fields = '__all__'
@@ -13,8 +14,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
-        read_only=True, slug_field='username'
-    )
+        slug_field='username', read_only=True)
 
     class Meta:
         fields = '__all__'
@@ -26,3 +26,28 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
         model = Group
+
+
+class FollowSerializer(serializers.ModelSerializer):
+    user = serializers.SlugRelatedField(
+        slug_field='username', read_only=True)
+    following = serializers.SlugRelatedField(
+        slug_field='username', queryset=User.objects.all())
+
+    def validate(self, data):
+        """Проверяем, что подписки уже нет, и что она не на самого себя."""
+        user = get_object_or_404(User, username=data['following'].username)
+        follow = Follow.objects.filter(
+            user=self.context['request'].user, following=user).exists()
+
+        if follow:
+            raise serializers.ValidationError('Подписка уже существует!')
+        elif user == self.context['request'].user:
+            raise serializers.ValidationError(
+                'Нельзя подписаться на самого себя!')
+
+        return data
+
+    class Meta:
+        fields = ('user', 'following')
+        model = Follow

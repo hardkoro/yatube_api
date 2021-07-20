@@ -1,7 +1,7 @@
 from rest_framework import permissions
 
 
-class OwnerOrReadOnly(permissions.BasePermission):
+class IsOwnerOrReadOnly(permissions.BasePermission):
     """Разрешение на редактирование объектов только их создателям."""
 
     def has_permission(self, request, view):
@@ -14,7 +14,7 @@ class OwnerOrReadOnly(permissions.BasePermission):
         return obj.author == request.user
 
 
-class ReadOnly(permissions.BasePermission):
+class IsReadOnly(permissions.BasePermission):
     """Разрешение на просмотр конкретного объекта."""
 
     def has_permission(self, request, view):
