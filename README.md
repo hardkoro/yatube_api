@@ -48,51 +48,85 @@ python manage.py runserver
 
 ## Примеры
 
+### Создание публикации:
+
+Запрос:
+
+```
+POST /api/v1/posts/
+```
+
+```
+curl -i -H 'Accept: application/json' -d 'text=test' http://localhost:8000/api/v1/posts/
+```
+
+Ответ:
+
+```
+{
+    "id": 1,
+    "author": "hardkoro",
+    "text": "test",
+    "pub_date": "2021-07-21T17:02:23.783149Z",
+    "image": null,
+    "group": null
+}
+```
+
 ### Получение публикаций:
 
 Запрос:
 
 ```
-GET http://localhost:8000/api/v1/posts/
+GET /api/v1/posts/
+```
+
+```
+curl -i -H 'Accept: application/json' http://localhost:8000/api/v1/posts/
 ```
 
 Ответ:
 
 ```
-{
-  "count": 123,
-  "next": "http://api.example.org/accounts/?offset=400&limit=100",
-  "previous": "http://api.example.org/accounts/?offset=200&limit=100",
-  "results": [
+[
     {
-      "id": 0,
-      "author": "string",
-      "text": "string",
-      "pub_date": "2019-08-24T14:15:22Z",
-      "image": "string",
-      "group": 0
+        "id": 1,
+        "author": "hardkoro",
+        "text": "test",
+        "pub_date": "2021-07-21T17:14:04.538150Z",
+        "image": null,
+        "group": null
     }
-  ]
-}
+]
 ```
 
-### Добавление комментария к посту: 
+### Добавление комментария к публикации: 
 
 Запрос:
 
 ```
-POST http://localhost:8000/api/v1/posts/{post_id}/comments/
+POST /api/v1/posts/1/comments/
+```
+
+```
+curl -i -H 'Accept: application/json' -d 'text=test&post=1' http://localhost:8000/api/v1/posts/1/comments/
 ```
 
 Ответ:
 
 ```
+HTTP/1.1 201 Created
+Date: Wed, 21 Jul 2021 17:14:46 GMT
+Status: 201 Created
+Content-Type: application/json
+Content-Length: 91
+
 {
-  "id": 0,
-  "author": "string",
-  "text": "string",
-  "created": "2019-08-24T14:15:22Z",
-  "post": 0
+    "id": 1,
+    "author": "hardkoro",
+    "text": "test",
+    "created": "2021-07-21T17:14:45.671229Z",
+    "post": 1
 }
 ```
 
