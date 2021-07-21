@@ -48,11 +48,15 @@ python manage.py runserver
 
 ## Примеры
 
-Получение публикаций:
+### Получение публикаций:
+
+Запрос:
 
 ```
-http://localhost:8000/api/v1/posts/
+GET http://localhost:8000/api/v1/posts/
 ```
+
+Ответ:
 
 ```
 {
@@ -72,11 +76,15 @@ http://localhost:8000/api/v1/posts/
 }
 ```
 
-Добавление комментария к посту: 
+### Добавление комментария к посту: 
+
+Запрос:
 
 ```
-http://localhost:8000/api/v1/posts/{post_id}/comments/
+POST http://localhost:8000/api/v1/posts/{post_id}/comments/
 ```
+
+Ответ:
 
 ```
 {
