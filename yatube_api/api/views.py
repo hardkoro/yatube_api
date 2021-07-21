@@ -40,7 +40,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         return super().get_permissions()
 
 
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     """Получение списка доступных сообществ."""
     serializer_class = GroupSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
