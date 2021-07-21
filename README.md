@@ -10,39 +10,39 @@ API позволяет получать и редактировать инфор
 
 Клонировать репозиторий и перейти в него в командной строке:
 
-```
+```bash
 git clone https://github.com/hardkoro/api_final_yatube.git
 ```
 
-```
+```bash
 cd api_final_yatube
 ```
 
 Cоздать и активировать виртуальное окружение:
 
-```
+```bash
 python -m venv venv
 ```
 
-```
+```bash
 source venv/source/activate
 ```
 
 Установить зависимости из файла requirements.txt:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 Выполнить миграции:
 
-```
+```bash
 python manage.py migrate
 ```
 
 Запустить проект:
 
-```
+```bash
 python manage.py runserver
 ```
 
