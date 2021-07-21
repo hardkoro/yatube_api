@@ -63,11 +63,17 @@ curl -i -H 'Accept: application/json' -d 'text=test' http://localhost:8000/api/v
 Ответ:
 
 ```
+HTTP/1.1 201 Created
+Date: Wed, 21 Jul 2021 17:10:04 GMT
+Status: 201 Created
+Content-Type: application/json
+Content-Length: 109
+
 {
     "id": 1,
     "author": "hardkoro",
     "text": "test",
-    "pub_date": "2021-07-21T17:02:23.783149Z",
+    "pub_date": "2021-07-21T17:14:04.538150Z",
     "image": null,
     "group": null
 }
@@ -88,6 +94,12 @@ curl -i -H 'Accept: application/json' http://localhost:8000/api/v1/posts/
 Ответ:
 
 ```
+HTTP/1.1 200 OK
+Date: Wed, 21 Jul 2021 17:12:24 GMT
+Status: 200 OK
+Content-Type: application/json
+Content-Length: 109
+
 [
     {
         "id": 1,
