@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from posts.models import Follow, Group, Post, User
+from posts.models import Group, Post, User
 from rest_framework import filters, mixins, permissions, status, viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
@@ -13,6 +13,7 @@ class CreateRetrieveViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
                             viewsets.GenericViewSet):
     """Вьюсет на получение списка и создания новой записи."""
     pass
+
 
 class PostViewSet(viewsets.ModelViewSet):
     """Получить список всех публикаций."""
