@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
-from posts.models import Group, Post, User
-from rest_framework import filters, permissions, status, viewsets
+from posts.models import Follow, Group, Post, User
+from rest_framework import filters, mixins, permissions, status, viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 
@@ -8,6 +8,11 @@ from .permissions import IsOwnerOrReadOnly, IsReadOnly
 from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer,
                           PostSerializer)
 
+
+class CreateRetrieveViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
+                            viewsets.GenericViewSet):
+    """Вьюсет на получение списка и создания новой записи."""
+    pass
 
 class PostViewSet(viewsets.ModelViewSet):
     """Получить список всех публикаций."""
@@ -51,10 +56,10 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(response, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-class FollowViewSet(viewsets.ModelViewSet):
+class FollowViewSet(CreateRetrieveViewSet):
     """Возвращает все подписки пользователя, сделавшего запрос."""
     serializer_class = FollowSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated, IsOwnerOrReadOnly)
     filter_backends = (filters.SearchFilter, )
     search_fields = ('following__username', 'user__username')
 
